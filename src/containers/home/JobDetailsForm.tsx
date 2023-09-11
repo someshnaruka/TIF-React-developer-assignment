@@ -5,11 +5,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
 import { IJobDetails } from "../../interface/forms";
+import { useData } from "./DataProvider";
 
 const JobDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
-  const { handleChange, errors, touched, handleBlur, handleSubmit, values } =
+  const { handleChange: formikHandleChange, errors, touched, handleBlur, handleSubmit, values } =
     useFormik<IJobDetails>({
       initialValues: {
         jobTitle: "",
@@ -30,6 +31,27 @@ const JobDetailsForm: React.FC<{
       },
   
     });
+    const data=useData();
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(e);
+      formikHandleChange(e); // Call Formik's handleChange
+      handleChangeContext(e); // Call your custom handleChangeContext
+    };
+    function handleChangeContext(e: React.ChangeEvent<HTMLInputElement>) {
+      console.log(e.target);
+      
+      const { name, value } = e.target;
+    
+      data?.setState((prev) => {
+        return {
+          ...prev,
+          jobDetails: {
+            ...prev.jobDetails,
+            [name]: value,
+          },
+        };
+      });
+    }
 console.log(values);
 
   return (

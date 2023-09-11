@@ -39,9 +39,12 @@ const DataProvider: React.FC<{ children: React.ReactNode }> = ({
 };
 
 export const useData = () => {
-  console.log(DataContext);
-  
-  return useContext(DataContext);
+  const context = useContext(DataContext);
+  if (context === null) {
+    throw new Error("useData must be used within a DataProvider");
+  }
+
+  return context;
 
 
   

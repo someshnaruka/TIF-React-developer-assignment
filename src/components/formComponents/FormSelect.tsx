@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { useTheme } from "@chakra-ui/react";
 import FromWrapper from "./FormWrapper";
@@ -31,6 +32,8 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 
   const handleChange = (value: any) => {
     onChange && onChange(name, value?.value);
+    console.log(value.value,"calue data");
+    
   };
   const handleBlur = () => {
     onBlur && onBlur(name, true);
@@ -52,27 +55,31 @@ const FormSelect: React.FC<IFormSelectProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         options={options}
+        className="custom_zindex"
+        
         // styles
         styles={{
           container: (base) => ({
             ...base,
             width: "100%",
             minWidth: "none",
-            height: "auto",
-            maxHeight: "none",
-            minHeight: "none",
+            height: "100%",
+            minHeight:"none",
+            
           }),
           control: (base, { isFocused }) => ({
             ...base,
             width: "100%",
             minWidth: "272px",
             height: "45px",
+         
+          
             border: isFocused
               ? `1px solid ${theme.colors.primary}`
               : error
               ? `1px solid ${theme.colors.errorRed}`
               : "1px solid #c0bcd7",
-            backgroundColor: theme.colors.inputBg,
+            backgroundColor: "theme.colors.inputBg",
             borderRadius: "10px",
             fontSize: ".875rem",
             fontWeight: "500",
@@ -83,11 +90,14 @@ const FormSelect: React.FC<IFormSelectProps> = ({
           valueContainer: (base) => ({
             ...base,
             paddingLeft: "20px",
+          
           }),
           option: (base, { isFocused }) => ({
             ...base,
             fontSize: ".875rem",
             fontWeight: "500",
+            
+          
           }),
         }}
         {...selectProps}

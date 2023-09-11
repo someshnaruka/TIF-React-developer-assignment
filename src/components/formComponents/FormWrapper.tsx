@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react";
+import {useState} from "react";
 import {
   FormControl,
   FormErrorMessage,
@@ -27,10 +30,12 @@ const FromWrapper: React.FC<IFormWrapperProps> = ({
   wrapperProps = {},
   touched,
 }) => {
+
+  const [show,setShow]=useState(false)
   return (
-    <FormControl width="100%" mb="24px" isInvalid={isInvalid} {...wrapperProps}>
+    <FormControl className={show ?"custom_zindex" :"none"}  onClick={()=>setShow(!show)} width="100%" mb="24px" isInvalid={isInvalid} {...wrapperProps}>
       {label && <FormLabel>{label}</FormLabel>}
-      <InputGroup width="100%" alignItems="center">
+      <InputGroup  width="100%" alignItems="center">
         {children}
       </InputGroup>
       {error && touched && (

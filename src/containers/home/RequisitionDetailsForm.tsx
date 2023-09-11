@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button, Flex, Box } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import FormInput from "../../components/formComponents/FormInput";
@@ -8,20 +8,20 @@ import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
 import { IRequisitionDetails } from "../../interface/forms";
 import { genderOptions, urgencyOptions } from "./constants";
+import { useData } from "./DataProvider";
 import { log } from "console";
-import {useData } from "./DataProvider";
 const RequisitionDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
   const {
-    handleChange,
+    handleChange: formikHandleChange,
     errors,
     touched,
     handleBlur,
     handleSubmit,
     values,
     setFieldTouched,
-    setFieldValue,
+    setFieldValue: formikFieldValue,
     isValid,
   } = useFormik<IRequisitionDetails>({
     initialValues: {
@@ -43,28 +43,47 @@ const RequisitionDetailsForm: React.FC<{
     onSubmit: (values) => {
       handleTab(1);
       console.log("hello");
-      
     },
   });
-  function handleChangeTitle(){
-    handleChange;
-    handleChangeContext;
-  }
+  console.log(values);
   const data = useData();
-function handleChangeContext(e : any){
-  e.preventDefault();
-  
-const {name,value}=e.target;
-  data?.setState((prev)=>
-  {
-  return{
-    ...prev,
-    [name]:value
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
+    formikHandleChange(e); // Call Formik's handleChange
+    handleChangeContext(e); // Call your custom handleChangeContext
+  };
+  function handleChangeContext(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e.target);
+
+    const { name, value } = e.target;
+
+    data?.setState((prev) => {
+      return {
+        ...prev,
+        requisitionDetails: {
+          ...prev.requisitionDetails,
+          [name]: value,
+        },
+      };
+    });
   }
-  })
-  
-}
-  console.log(values)
+
+  const setFieldValue = (e: React.ChangeEvent<HTMLInputElement>,SelectedOption:any) => {
+    console.log(e,"option");
+    const name=e.toString();
+    console.log(name,"name");
+    formikFieldValue(name,SelectedOption); // Call Formik's handleChange
+    data?.setState((prev) => {
+      return {
+        ...prev,
+        requisitionDetails: {
+          ...prev.requisitionDetails,
+          [name]: SelectedOption,
+        },
+      };
+    }); // Call your custom handleChangeContext
+  };
+
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -98,6 +117,7 @@ const {name,value}=e.target;
           error={errors.gender}
           touched={touched.gender}
           value={values.gender}
+          
         />
         <FormSelect
           label="Urgency"

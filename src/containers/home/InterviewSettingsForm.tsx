@@ -10,6 +10,7 @@ import {
   interviewModeOptions,
 } from "./constants";
 import * as Yup from "yup";
+import { useData } from "./DataProvider";
 const InterviewDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
 }> = ({ handleTab }) => {
@@ -19,7 +20,7 @@ const InterviewDetailsForm: React.FC<{
     handleSubmit,
     values,
     setFieldTouched,
-    setFieldValue,
+    setFieldValue: formikFieldValue,
   } = useFormik<IInterViewSettings>({
     initialValues: {
       interviewMode: "",
@@ -36,6 +37,22 @@ const InterviewDetailsForm: React.FC<{
       alert("Form successfully submitted");
     },
   });
+  const data = useData();
+  const setFieldValue = (e: React.ChangeEvent<HTMLInputElement>,SelectedOption:any) => {
+    console.log(e,"option");
+    const name=e.toString();
+    console.log(name,"name");
+    formikFieldValue(name,SelectedOption); // Call Formik's handleChange
+    data?.setState((prev) => {
+      return {
+        ...prev,
+       interviewSettings: {
+          ...prev.interviewSettings,
+          [name]: SelectedOption,
+        },
+      };
+    }); // Call your custom handleChangeContext
+  };
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>

@@ -15,9 +15,6 @@ import {
   interviewModeOptions,
   urgencyOptions,
 } from "./constants";
-import { log } from "console";
-// const data=useData();
-// console.log(data?.state.requisitionDetails);
 
 
 const DataCard: React.FC<{ title: string; children: React.ReactNode }> = ({
@@ -62,10 +59,10 @@ const PreviewCard: React.FC<{
   requisitionDetails?: IRequisitionDetails;
   jobDetails?: IJobDetails;
   interviewSettings?: IInterViewSettings;
-}> = ({ requisitionDetails, jobDetails, interviewSettings }) => {
+}> = () => {
 
-  console.log((requisitionDetails));
-  
+  const { state } = useData(); 
+  const { requisitionDetails, jobDetails, interviewSettings } = state;
   return (
     <Box p="1rem">
       <Box borderRadius="10px" bgColor="gray.100" height="fit-content">
