@@ -16,8 +16,8 @@ import {
   urgencyOptions,
 } from "./constants";
 import { log } from "console";
-const data=useData();
-console.log(data?.state.requisitionDetails);
+// const data=useData();
+// console.log(data?.state.requisitionDetails);
 
 
 const DataCard: React.FC<{ title: string; children: React.ReactNode }> = ({

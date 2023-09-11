@@ -39,7 +39,10 @@ const DataProvider: React.FC<{ children: React.ReactNode }> = ({
 };
 
 export const useData = () => {
+  console.log(DataContext);
+  
   return useContext(DataContext);
+
 
   
 };

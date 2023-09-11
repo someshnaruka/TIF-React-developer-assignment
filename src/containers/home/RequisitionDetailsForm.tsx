@@ -46,6 +46,10 @@ const RequisitionDetailsForm: React.FC<{
       
     },
   });
+  function handleChangeTitle(){
+    handleChange;
+    handleChangeContext;
+  }
   const data = useData();
 function handleChangeContext(e : any){
   e.preventDefault();
@@ -68,7 +72,7 @@ const {name,value}=e.target;
           label="Requisition Title"
           placeholder="Enter requisition title"
           name="requisitionTitle"
-          onChange={()=>{handleChange;handleChangeContext;}}
+          onChange={handleChange}
           onBlur={handleBlur}
           value={values?.requisitionTitle}
           error={errors?.requisitionTitle}
