@@ -24,8 +24,7 @@ const JobDetailsForm: React.FC<{
       
       }),
       onSubmit: (values) => {
-        console.log("hello");
-        console.log(values);
+      
         handleTab(2);
       
       },
@@ -33,12 +32,12 @@ const JobDetailsForm: React.FC<{
     });
     const data=useData();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e);
+    
       formikHandleChange(e); // Call Formik's handleChange
       handleChangeContext(e); // Call your custom handleChangeContext
     };
     function handleChangeContext(e: React.ChangeEvent<HTMLInputElement>) {
-      console.log(e.target);
+   
       
       const { name, value } = e.target;
     
@@ -52,7 +51,7 @@ const JobDetailsForm: React.FC<{
         };
       });
     }
-console.log(values);
+
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>

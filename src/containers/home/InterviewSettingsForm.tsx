@@ -33,15 +33,15 @@ const InterviewDetailsForm: React.FC<{
       interviewLanguage: Yup.string().required("Interview Language is required"),
     }),
     onSubmit: (values) => {
-      console.log({ values });
+     
       alert("Form successfully submitted");
     },
   });
   const data = useData();
   const setFieldValue = (e: React.ChangeEvent<HTMLInputElement>,SelectedOption:any) => {
-    console.log(e,"option");
+    
     const name=e.toString();
-    console.log(name,"name");
+   
     formikFieldValue(name,SelectedOption); // Call Formik's handleChange
     data?.setState((prev) => {
       return {

@@ -34,7 +34,7 @@ const HomeLayout = (children:any) => {
     setPage(pageNumber);
   };
 const data=useData();
-console.log(data?.state.requisitionDetails,"user data");
+
 
   return (
     <Box w="100%">

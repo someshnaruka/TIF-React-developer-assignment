@@ -32,7 +32,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
 
   const handleChange = (value: any) => {
     onChange && onChange(name, value?.value);
-    console.log(value.value,"calue data");
+    
     
   };
   const handleBlur = () => {

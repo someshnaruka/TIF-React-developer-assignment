@@ -42,18 +42,18 @@ const RequisitionDetailsForm: React.FC<{
     }),
     onSubmit: (values) => {
       handleTab(1);
-      console.log("hello");
+     
     },
   });
-  console.log(values);
+
   const data = useData();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+  
     formikHandleChange(e); // Call Formik's handleChange
     handleChangeContext(e); // Call your custom handleChangeContext
   };
   function handleChangeContext(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target);
+ 
 
     const { name, value } = e.target;
 
@@ -69,9 +69,9 @@ const RequisitionDetailsForm: React.FC<{
   }
 
   const setFieldValue = (e: React.ChangeEvent<HTMLInputElement>,SelectedOption:any) => {
-    console.log(e,"option");
+    
     const name=e.toString();
-    console.log(name,"name");
+   
     formikFieldValue(name,SelectedOption); // Call Formik's handleChange
     data?.setState((prev) => {
       return {

@@ -40,7 +40,7 @@ const KeyValue: React.FC<{
   title: string;
   value?: string;
 }> = ({ title, value }) => {
-  console.log(value,"value");
+
   
   return (
     <Box w="100%">
